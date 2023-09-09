@@ -32,7 +32,13 @@ chown -R builder .
 # INPUT_MAKEPKGARGS is intentionally unquoted to allow arg splitting
 # shellcheck disable=SC2086
 pacman -S --noconfirm --needed paru
-sudo -H -u builder updpkgsums
+
+if test -z "${INPUT_MAKEPKGPROFILEPATH}";then
+	echo "Didn't provide makepkg profile path. Skipped."
+else
+	sudo -H -u builder install -D /etc/makepkg.conf ~/.config/pacman/makepkg.conf # 怕出权限问题所以先传统方式安装
+	sudo -H -u cat ${INPUT_MAKEPKGPROFILEPATH} > ~/.config/pacman/makepkg.conf
+fi
 
 sudo -H -u builder paru -U --noconfirm --mflags "${INPUT_MAKEPKGARGS:-}"
 # Get array of packages to be built

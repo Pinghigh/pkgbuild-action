@@ -25,6 +25,10 @@ inputs:
     description: "Additional arguments to pass to makepkg."
     required: false
     default: ""
+  makepkgProfilePath:
+    description: "path of makepkg.conf"
+    required: false
+    default: ""
 outputs:
   pkgfile0:
     description: "Filename of the first generated package archive. Usually only one."
