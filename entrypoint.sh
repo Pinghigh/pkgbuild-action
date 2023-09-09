@@ -37,7 +37,7 @@ if test -z "${INPUT_MAKEPKGPROFILEPATH}";then
 	sudo -H -u builder paru -S --noconfirm --clonedir . $pkgname
 else
     chmod -R a+rw ${INPUT_MAKEPKGPROFILEPATH}
-	sudo -H -u builder paru -S --noconfirm --clonedir . $pkgname --mflags \"--config ${INPUT_MAKEPKGPROFILEPATH}\"
+	sudo -H -u builder paru -S $pkgname --mflags "--config ${INPUT_MAKEPKGPROFILEPATH}" --noconfirm --clonedir . 
 fi
 
 sudo -H -u builder paru -U --noconfirm --mflags "${INPUT_MAKEPKGARGS:-}"
