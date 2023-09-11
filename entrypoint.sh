@@ -34,10 +34,10 @@ chown -R builder .
 pacman -S --noconfirm --needed paru
 
 if test -z "${INPUT_MAKEPKGPROFILEPATH}";then
-	sudo -H -u builder paru -U --noconfirm --clonedir . $pkgname
+	sudo -H -u builder paru -U --noconfirm --clonedir . $pkgname --mflags "${INPUT_MAKEPKGARGS:-}"
 else
     chmod -R a+rw ${INPUT_MAKEPKGPROFILEPATH}
-	sudo -H -u builder paru -U --mflags "--config ${INPUT_MAKEPKGPROFILEPATH}" --noconfirm --clonedir . 
+	sudo -H -u builder paru -U --mflags "--config ${INPUT_MAKEPKGPROFILEPATH} ${INPUT_MAKEPKGARGS:-}" --noconfirm --clonedir .
 fi
 
 sudo -H -u builder paru -U --noconfirm --mflags "${INPUT_MAKEPKGARGS:-}"
