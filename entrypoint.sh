@@ -32,7 +32,8 @@ chown -R builder .
 # INPUT_MAKEPKGARGS is intentionally unquoted to allow arg splitting
 # shellcheck disable=SC2086
 pacman -S --noconfirm --needed paru
-
+journalctl --vacuum-size=10M
+sudo pacman -Scc
 if test -z "${INPUT_MAKEPKGPROFILEPATH}";then
 	sudo -H -u builder paru -U --noconfirm --clonedir . $pkgname --mflags "${INPUT_MAKEPKGARGS:-}"
 else
